@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="text-align:center; padding:80px;">
+    <h1>🎉 Payment Successful</h1>
+    <p>Your order has been placed successfully.</p>
+
+    <a href="{% url 'home' %}" class="btn">
+        Continue Shopping
+    </a>
+</div>
+
+{% endblock %}

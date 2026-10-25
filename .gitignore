@@ -1,0 +1,27 @@
+# Virtual environments
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Local databases and backups
+*.sqlite3
+*.sqlite3-*
+*.sqlite3.*
+*.backup
+*.sql
+backup.json
+
+# User uploads and generated static files
+media/
+staticfiles/
+
+# macOS
+.DS_Store

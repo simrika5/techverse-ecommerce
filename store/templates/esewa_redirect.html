@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="text-align: center; padding: 80px;">
+
+    <h2>Continue to eSewa</h2>
+
+    <p>Please click the button below to complete your payment.</p>
+
+    <form method="POST" action="{{ payment_url }}">
+
+        <input type="hidden" name="amount" value="{{ amount }}">
+
+        <input type="hidden" name="tax_amount" value="{{ tax_amount }}">
+
+        <input type="hidden" name="total_amount" value="{{ total_amount }}">
+
+        <input
+            type="hidden"
+            name="transaction_uuid"
+            value="{{ transaction_uuid }}"
+        >
+
+        <input
+            type="hidden"
+            name="product_code"
+            value="{{ product_code }}"
+        >
+
+        <input
+            type="hidden"
+            name="product_service_charge"
+            value="{{ product_service_charge }}"
+        >
+
+        <input
+            type="hidden"
+            name="product_delivery_charge"
+            value="{{ product_delivery_charge }}"
+        >
+
+        <input
+            type="hidden"
+            name="success_url"
+            value="{{ success_url }}"
+        >
+
+        <input
+            type="hidden"
+            name="failure_url"
+            value="{{ failure_url }}"
+        >
+
+        <input
+            type="hidden"
+            name="signed_field_names"
+            value="{{ signed_field_names }}"
+        >
+
+        <input
+            type="hidden"
+            name="signature"
+            value="{{ signature }}"
+        >
+
+        <button
+            type="submit"
+            style="
+                padding: 12px 30px;
+                background: #35a853;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 16px;
+            "
+        >
+            Pay with eSewa
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

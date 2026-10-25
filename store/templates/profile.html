@@ -1,0 +1,1562 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-page">
+
+    <div class="profile-wrapper">
+
+        <!-- =====================================================
+             PROFILE HERO
+        ====================================================== -->
+
+        <div class="profile-hero">
+
+            <div class="hero-background"></div>
+
+            <div class="profile-avatar">
+
+                {% if user.first_name %}
+                    {{ user.first_name|first|upper }}
+                {% else %}
+                    {{ user.username|first|upper }}
+                {% endif %}
+
+            </div>
+
+            <div class="profile-hero-info">
+
+                <h1>
+                    {% if user.first_name %}
+                        {{ user.first_name }}
+                        {% if user.last_name %}
+                            {{ user.last_name }}
+                        {% endif %}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </h1>
+
+                <p>
+                    <i class="fa-solid fa-at"></i>
+                    {{ user.username }}
+                </p>
+
+                {% if user.email %}
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    {{ user.email }}
+                </p>
+                {% endif %}
+
+            </div>
+
+            <div class="account-badge">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Account</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             CONTENT GRID
+        ====================================================== -->
+
+        <div class="profile-grid">
+
+
+            <!-- =================================================
+                 PERSONAL INFORMATION
+            ================================================== -->
+
+            <div class="profile-card">
+
+                <div class="card-header">
+
+                    <div class="header-icon purple">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Personal Information</h2>
+
+                        <p>
+                            Your basic account details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details-grid">
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            First Name
+                        </span>
+
+                        <strong>
+                            {% if user.first_name %}
+                                {{ user.first_name }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Middle Name
+                        </span>
+
+                        <strong>
+                            {% if profile.middle_name %}
+                                {{ profile.middle_name }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Last Name
+                        </span>
+
+                        <strong>
+                            {% if user.last_name %}
+                                {{ user.last_name }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Username
+                        </span>
+
+                        <strong>
+                            {{ user.username }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONTACT INFORMATION
+            ================================================== -->
+
+            <div class="profile-card">
+
+                <div class="card-header">
+
+                    <div class="header-icon blue">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Contact Information</h2>
+
+                        <p>
+                            Your delivery and contact details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-list">
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Email Address</span>
+
+                            <strong>
+                                {% if user.email %}
+                                    {{ user.email }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon green">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Phone Number</span>
+
+                            <strong>
+                                {% if profile.phone %}
+                                    {{ profile.phone }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon orange">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Delivery Address</span>
+
+                            <strong>
+                                {% if profile.address %}
+                                    {{ profile.address }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCOUNT OVERVIEW
+            ================================================== -->
+
+            <div class="profile-card account-card">
+
+                <div class="card-header">
+
+                    <div class="header-icon pink">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Account Overview</h2>
+
+                        <p>
+                            Your account status
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-status">
+
+                    <div class="status-icon">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>Account Active</strong>
+
+                        <span>
+                            Your account is ready to use
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <span>
+                        <i class="fa-solid fa-user"></i>
+                        Username
+                    </span>
+
+                    <strong>
+                        {{ user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <span>
+                        <i class="fa-solid fa-envelope"></i>
+                        Email
+                    </span>
+
+                    <strong>
+                        {% if user.email %}
+                            Verified
+                        {% else %}
+                            Not provided
+                        {% endif %}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 QUICK ACTIONS
+            ================================================== -->
+
+            <div class="profile-card actions-card">
+
+                <div class="card-header">
+
+                    <div class="header-icon dark">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Quick Actions</h2>
+
+                        <p>
+                            Manage your shopping experience
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a href="{% url 'home' %}" class="quick-action">
+
+                        <div class="action-icon purple">
+                            <i class="fa-solid fa-house"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>Home</strong>
+
+                            <span>
+                                Browse products
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'cart' %}" class="quick-action">
+
+                        <div class="action-icon blue">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>My Cart</strong>
+
+                            <span>
+                                View your shopping cart
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'orders' %}" class="quick-action">
+
+                        <div class="action-icon green">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>My Orders</strong>
+
+                            <span>
+                                Track your orders
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'wishlist' %}" class="quick-action">
+
+                        <div class="action-icon pink">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>Wishlist</strong>
+
+                            <span>
+                                View saved products
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             BOTTOM BUTTON
+        ====================================================== -->
+
+        <div class="profile-footer">
+
+            <a href="{% url 'home' %}" class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<style>
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.profile-page {
+
+    min-height: calc(100vh - 80px);
+
+    padding: 45px 20px 70px;
+
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(124,58,237,.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(37,99,235,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fafc,
+            #eef2ff
+        );
+
+    font-family:
+        'Poppins',
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+}
+
+
+.profile-wrapper {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+}
+
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.profile-hero {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    min-height: 190px;
+
+    padding: 35px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81 55%,
+            #4c1d95
+        );
+
+    box-shadow:
+        0 25px 60px rgba(30,27,75,.25);
+
+}
+
+
+.hero-background {
+
+    position: absolute;
+
+    width: 400px;
+
+    height: 400px;
+
+    right: -130px;
+
+    top: -220px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(139,92,246,.25);
+
+    filter: blur(3px);
+
+}
+
+
+.hero-background::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+
+    height: 250px;
+
+    right: 80px;
+
+    top: 170px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(59,130,246,.16);
+
+}
+
+
+/* ============================================================
+   AVATAR
+============================================================ */
+
+.profile-avatar {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 105px;
+
+    height: 105px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a78bfa,
+            #6366f1
+        );
+
+    border:
+        5px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.25);
+
+    color: white;
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+}
+
+
+/* ============================================================
+   HERO TEXT
+============================================================ */
+
+.profile-hero-info {
+
+    position: relative;
+
+    z-index: 2;
+
+    flex: 1;
+
+}
+
+
+.profile-hero-info h1 {
+
+    margin: 0 0 8px;
+
+    font-size: 31px;
+
+    letter-spacing: -.7px;
+
+}
+
+
+.profile-hero-info p {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 4px 14px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+}
+
+
+.profile-hero-info p i {
+
+    color: #a78bfa;
+
+}
+
+
+/* ============================================================
+   ACCOUNT BADGE
+============================================================ */
+
+.account-badge {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 13px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    color: #e2e8f0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    backdrop-filter: blur(10px);
+
+}
+
+
+.account-badge i {
+
+    color: #4ade80;
+
+}
+
+
+/* ============================================================
+   GRID
+============================================================ */
+
+.profile-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+}
+
+
+/* ============================================================
+   CARDS
+============================================================ */
+
+.profile-card {
+
+    background:
+        rgba(255,255,255,.94);
+
+    border:
+        1px solid rgba(226,232,240,.9);
+
+    border-radius: 23px;
+
+    padding: 27px;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.07);
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        .25s ease;
+
+}
+
+
+.profile-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.10);
+
+}
+
+
+/* ============================================================
+   CARD HEADER
+============================================================ */
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.card-header h2 {
+
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 17px;
+
+}
+
+
+.card-header p {
+
+    margin: 4px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+}
+
+
+/* ============================================================
+   HEADER ICONS
+============================================================ */
+
+.header-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+}
+
+
+.header-icon.purple {
+
+    color: #7c3aed;
+
+    background: #f3e8ff;
+
+}
+
+
+.header-icon.blue {
+
+    color: #2563eb;
+
+    background: #dbeafe;
+
+}
+
+
+.header-icon.green {
+
+    color: #16a34a;
+
+    background: #dcfce7;
+
+}
+
+
+.header-icon.pink {
+
+    color: #db2777;
+
+    background: #fce7f3;
+
+}
+
+
+.header-icon.dark {
+
+    color: #334155;
+
+    background: #e2e8f0;
+
+}
+
+
+/* ============================================================
+   DETAILS
+============================================================ */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 13px;
+
+}
+
+
+.detail-item {
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #eef2f7;
+
+}
+
+
+.detail-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: .4px;
+
+}
+
+
+.detail-item strong {
+
+    display: block;
+
+    color: #1e293b;
+
+    font-size: 13px;
+
+    word-break: break-word;
+
+}
+
+
+/* ============================================================
+   CONTACT
+============================================================ */
+
+.contact-list {
+
+    display: grid;
+
+    gap: 12px;
+
+}
+
+
+.contact-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #eef2f7;
+
+}
+
+
+.contact-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #2563eb;
+
+    background: #dbeafe;
+
+}
+
+
+.contact-icon.green {
+
+    color: #16a34a;
+
+    background: #dcfce7;
+
+}
+
+
+.contact-icon.orange {
+
+    color: #ea580c;
+
+    background: #ffedd5;
+
+}
+
+
+.contact-item div:last-child {
+
+    min-width: 0;
+
+}
+
+
+.contact-item span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+}
+
+
+.contact-item strong {
+
+    display: block;
+
+    color: #1e293b;
+
+    font-size: 12px;
+
+    word-break: break-word;
+
+}
+
+
+/* ============================================================
+   ACCOUNT STATUS
+============================================================ */
+
+.account-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 16px;
+
+    margin-bottom: 17px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4,
+            #ecfdf5
+        );
+
+    border:
+        1px solid #bbf7d0;
+
+}
+
+
+.status-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+}
+
+
+.account-status strong {
+
+    display: block;
+
+    color: #166534;
+
+    font-size: 13px;
+
+}
+
+
+.account-status span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #4d7c5a;
+
+    font-size: 10px;
+
+}
+
+
+/* ============================================================
+   ACCOUNT ROW
+============================================================ */
+
+.account-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 13px 2px;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+}
+
+
+.account-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.account-row span {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+.account-row span i {
+
+    width: 20px;
+
+    color: #7c3aed;
+
+}
+
+
+.account-row strong {
+
+    color: #1e293b;
+
+    font-size: 12px;
+
+}
+
+
+/* ============================================================
+   QUICK ACTIONS
+============================================================ */
+
+.quick-actions {
+
+    display: grid;
+
+    gap: 9px;
+
+}
+
+
+.quick-action {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    background: #f8fafc;
+
+    border:
+        1px solid transparent;
+
+    transition:
+        .22s ease;
+
+}
+
+
+.quick-action:hover {
+
+    background: white;
+
+    border-color: #e2e8f0;
+
+    transform: translateX(4px);
+
+    box-shadow:
+        0 7px 20px rgba(15,23,42,.07);
+
+}
+
+
+.action-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+}
+
+
+.action-icon.purple {
+
+    color: #7c3aed;
+
+    background: #f3e8ff;
+
+}
+
+
+.action-icon.blue {
+
+    color: #2563eb;
+
+    background: #dbeafe;
+
+}
+
+
+.action-icon.green {
+
+    color: #16a34a;
+
+    background: #dcfce7;
+
+}
+
+
+.action-icon.pink {
+
+    color: #db2777;
+
+    background: #fce7f3;
+
+}
+
+
+.quick-action > div:nth-child(2) {
+
+    flex: 1;
+
+}
+
+
+.quick-action strong {
+
+    display: block;
+
+    color: #1e293b;
+
+    font-size: 12px;
+
+}
+
+
+.quick-action span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+
+}
+
+
+.arrow {
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+
+    margin-right: 5px;
+
+    transition: .2s;
+
+}
+
+
+.quick-action:hover .arrow {
+
+    color: #7c3aed;
+
+    transform: translateX(3px);
+
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.profile-footer {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 25px;
+
+}
+
+
+.back-home {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 19px;
+
+    border-radius: 13px;
+
+    background: white;
+
+    color: #475569;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    border:
+        1px solid #e2e8f0;
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.05);
+
+    transition: .2s;
+
+}
+
+
+.back-home:hover {
+
+    color: #7c3aed;
+
+    border-color: #c4b5fd;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .profile-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-page {
+
+        padding:
+            25px 12px 50px;
+
+    }
+
+
+    .profile-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 25px;
+
+        min-height: auto;
+
+        border-radius: 22px;
+
+    }
+
+
+    .profile-avatar {
+
+        width: 82px;
+
+        height: 82px;
+
+        border-radius: 23px;
+
+        font-size: 32px;
+
+    }
+
+
+    .profile-hero-info h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .account-badge {
+
+        position: absolute;
+
+        top: 20px;
+
+        right: 20px;
+
+    }
+
+
+    .profile-grid {
+
+        gap: 14px;
+
+        margin-top: 14px;
+
+    }
+
+
+    .profile-card {
+
+        padding: 20px;
+
+        border-radius: 19px;
+
+    }
+
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .account-badge span {
+
+        display: none;
+
+    }
+
+
+    .account-badge {
+
+        width: 30px;
+
+        height: 30px;
+
+        padding: 0;
+
+        justify-content: center;
+
+    }
+
+}
+
+</style>
+
+
+{% endblock %}

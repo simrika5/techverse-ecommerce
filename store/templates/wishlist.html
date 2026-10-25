@@ -1,0 +1,689 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    .wishlist-page {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 55px 24px 90px;
+    }
+
+    /* ================================
+       HEADER
+    ================================= */
+
+    .wishlist-top {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 38px;
+    }
+
+    .wishlist-title-wrap h1 {
+        margin: 0;
+        font-size: 42px;
+        line-height: 1.05;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        color: #111827;
+    }
+
+    .wishlist-title-wrap p {
+        margin: 10px 0 0;
+        color: #6b7280;
+        font-size: 16px;
+    }
+
+    .wishlist-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff1f2;
+        color: #e11d48;
+        border: 1px solid #fecdd3;
+        padding: 9px 15px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+
+    /* ================================
+       GRID
+    ================================= */
+
+    .wishlist-grid {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(270px, 1fr)
+        );
+        gap: 24px;
+    }
+
+
+    /* ================================
+       CARD
+    ================================= */
+
+    .wish-card {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease,
+            border-color .25s ease;
+    }
+
+    .wish-card:hover {
+        transform: translateY(-6px);
+        border-color: #d1d5db;
+        box-shadow:
+            0 18px 45px rgba(15, 23, 42, .10);
+    }
+
+
+    /* ================================
+       IMAGE
+    ================================= */
+
+    .product-image {
+        position: relative;
+        width: 100%;
+        height: 275px;
+        background:
+            linear-gradient(
+                145deg,
+                #f8fafc,
+                #eef2f7
+            );
+        overflow: hidden;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 22px;
+        transition: transform .35s ease;
+    }
+
+    .wish-card:hover .product-image img {
+        transform: scale(1.06);
+    }
+
+    .wishlist-heart {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+
+        width: 40px;
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: rgba(255,255,255,.92);
+        color: #e11d48;
+
+        box-shadow:
+            0 5px 18px rgba(0,0,0,.10);
+
+        z-index: 2;
+    }
+
+    .no-image {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #9ca3af;
+        font-size: 14px;
+    }
+
+
+    /* ================================
+       PRODUCT INFO
+    ================================= */
+
+    .product-info {
+        padding: 21px;
+    }
+
+    .product-category {
+        margin-bottom: 7px;
+
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .7px;
+
+        color: #9ca3af;
+    }
+
+    .product-info h2 {
+        margin: 0;
+
+        color: #111827;
+
+        font-size: 18px;
+        line-height: 1.35;
+        font-weight: 700;
+
+        min-height: 49px;
+    }
+
+    .price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-top: 14px;
+        margin-bottom: 18px;
+    }
+
+    .price {
+        margin: 0;
+
+        color: #111827;
+
+        font-size: 21px;
+        font-weight: 800;
+    }
+
+    .stock {
+        font-size: 12px;
+        font-weight: 700;
+        color: #16a34a;
+    }
+
+    .stock.out {
+        color: #dc2626;
+    }
+
+
+    /* ================================
+       ACTIONS
+    ================================= */
+
+    .actions {
+        display: grid;
+        grid-template-columns: 1fr 46px;
+        gap: 10px;
+    }
+
+    .cart-btn {
+        height: 46px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        border: none;
+        border-radius: 11px;
+
+        background: #111827;
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease,
+            transform .2s ease;
+    }
+
+    .cart-btn:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+    }
+
+    .cart-btn:disabled {
+        background: #d1d5db;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .remove-btn {
+        width: 46px;
+        height: 46px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid #e5e7eb;
+        border-radius: 11px;
+
+        background: #ffffff;
+        color: #6b7280;
+
+        cursor: pointer;
+
+        transition:
+            color .2s ease,
+            background .2s ease,
+            border-color .2s ease;
+    }
+
+    .remove-btn:hover {
+        color: #dc2626;
+        background: #fef2f2;
+        border-color: #fecaca;
+    }
+
+
+    /* ================================
+       EMPTY STATE
+    ================================= */
+
+    .empty-state {
+        min-height: 480px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        border: 1px dashed #d1d5db;
+        border-radius: 24px;
+
+        background:
+            radial-gradient(
+                circle at top,
+                #fff1f2,
+                #ffffff 50%
+            );
+
+        padding: 50px 20px;
+    }
+
+    .empty-inner {
+        max-width: 480px;
+    }
+
+    .empty-icon {
+        width: 92px;
+        height: 92px;
+
+        margin: 0 auto 25px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #fff1f2;
+        color: #e11d48;
+
+        font-size: 40px;
+    }
+
+    .empty-state h2 {
+        margin: 0;
+
+        font-size: 29px;
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .empty-state p {
+        margin: 12px 0 26px;
+
+        color: #6b7280;
+        line-height: 1.7;
+    }
+
+    .continue-shopping {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+
+        padding: 13px 22px;
+
+        border-radius: 11px;
+
+        background: #111827;
+        color: #ffffff;
+
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        transition: background .2s ease;
+    }
+
+    .continue-shopping:hover {
+        background: #2563eb;
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 700px) {
+
+        .wishlist-page {
+            padding: 35px 15px 60px;
+        }
+
+        .wishlist-top {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .wishlist-title-wrap h1 {
+            font-size: 32px;
+        }
+
+        .wishlist-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .product-image {
+            height: 190px;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h2 {
+            font-size: 15px;
+            min-height: 42px;
+        }
+
+        .price {
+            font-size: 17px;
+        }
+
+        .stock {
+            display: none;
+        }
+
+        .wishlist-heart {
+            width: 34px;
+            height: 34px;
+            top: 10px;
+            right: 10px;
+        }
+
+        .cart-btn {
+            font-size: 12px;
+        }
+
+    }
+
+</style>
+
+
+<div class="wishlist-page">
+
+    <!-- HEADER -->
+
+    <div class="wishlist-top">
+
+        <div class="wishlist-title-wrap">
+
+            <h1>
+                My Wishlist
+            </h1>
+
+            <p>
+                Products you've saved for later.
+            </p>
+
+        </div>
+
+
+        {% if wishlist_count %}
+
+            <div class="wishlist-count">
+
+                <i class="fa-solid fa-heart"></i>
+
+                {{ wishlist_count }}
+                {% if wishlist_count == 1 %}
+                    item
+                {% else %}
+                    items
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    {% if items %}
+
+        <div class="wishlist-grid">
+
+            {% for item in items %}
+
+                <article class="wish-card">
+
+                    <div class="product-image">
+
+                        <div class="wishlist-heart">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+
+
+                        {% if item.product.image %}
+
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="no-image">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        {% if item.product.category %}
+
+                            <div class="product-category">
+                                {{ item.product.category.name }}
+                            </div>
+
+                        {% endif %}
+
+
+                        <h2>
+                            {{ item.product.name }}
+                        </h2>
+
+
+                        <div class="price-row">
+
+                            <p class="price">
+                                Rs. {{ item.product.price }}
+                            </p>
+
+
+                            {% if item.product.stock > 0 %}
+
+                                <span class="stock">
+                                    In stock
+                                </span>
+
+                            {% else %}
+
+                                <span class="stock out">
+                                    Out of stock
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            {% if item.product.stock > 0 %}
+
+                                <form
+                                    method="post"
+                                    action="{% url 'add_to_cart' item.product.id %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <input
+                                        type="hidden"
+                                        name="quantity"
+                                        value="1"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="next"
+                                        value="{% url 'wishlist' %}"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="cart-btn"
+                                    >
+
+                                        <i class="fa-solid fa-cart-shopping"></i>
+
+                                        Add to Cart
+
+                                    </button>
+
+                                </form>
+
+                            {% else %}
+
+                                <button
+                                    type="button"
+                                    class="cart-btn"
+                                    disabled
+                                >
+                                    Out of Stock
+                                </button>
+
+                            {% endif %}
+
+
+                            <form
+                                method="post"
+                                action="{% url 'remove_wishlist' item.product.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <input
+                                    type="hidden"
+                                    name="next"
+                                    value="{% url 'wishlist' %}"
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="remove-btn"
+                                    title="Remove from wishlist"
+                                    aria-label="Remove from wishlist"
+                                >
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <!-- EMPTY -->
+
+        <div class="empty-state">
+
+            <div class="empty-inner">
+
+                <div class="empty-icon">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </div>
+
+
+                <h2>
+                    Your wishlist is empty
+                </h2>
+
+
+                <p>
+                    Save products you love and they'll
+                    appear here. Start exploring our
+                    collection and build your wishlist.
+                </p>
+
+
+                <a
+                    href="{% url 'products' %}"
+                    class="continue-shopping"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

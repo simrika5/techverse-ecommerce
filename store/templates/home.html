@@ -1,0 +1,3069 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   TECHVERSE HOME
+========================================================= */
+
+:root {
+
+    --tv-dark: #0f172a;
+    --tv-dark-soft: #1e293b;
+
+    --tv-blue: #2563eb;
+    --tv-blue-light: #eff6ff;
+
+    --tv-text: #0f172a;
+    --tv-muted: #64748b;
+
+    --tv-border: #e5e7eb;
+
+    --tv-bg: #f8fafc;
+    --tv-white: #ffffff;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.home-page {
+
+    width: 100%;
+
+    color: var(--tv-text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+
+.home-page a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-shell {
+
+    position: relative;
+
+    min-height: 590px;
+
+    padding: 0;
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    background: #111827;
+
+    box-shadow:
+        0 25px 70px rgba(15,23,42,.16);
+}
+
+
+.hero-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    transform: scale(1.01);
+}
+
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,12,18,.80) 0%,
+            rgba(8,12,18,.54) 25%,
+            rgba(8,12,18,.18) 48%,
+            rgba(8,12,18,.02) 72%
+        );
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 590px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 70px;
+}
+
+
+.hero-copy {
+
+    max-width: 570px;
+
+    color: white;
+}
+
+
+.hero-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 8px 13px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.10);
+
+    color: rgba(255,255,255,.90);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+
+    backdrop-filter: blur(8px);
+}
+
+
+.hero-content h1 {
+
+    margin: 0 0 20px;
+
+    max-width: 650px;
+
+    color: white;
+
+    font-size: clamp(48px, 6vw, 76px);
+
+    font-weight: 700;
+
+    line-height: .98;
+
+    letter-spacing: -.065em;
+}
+
+
+.hero-title-accent {
+
+    color: #dbeafe;
+}
+
+
+.hero-content p {
+
+    max-width: 500px;
+
+    margin: 0 0 30px;
+
+    color: rgba(255,255,255,.84);
+
+    font-size: 17px;
+
+    line-height: 1.65;
+
+    letter-spacing: -.01em;
+}
+
+
+.hero-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+
+.hero-actions .btn {
+
+    padding: 13px 21px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+
+.hero-actions .btn-primary {
+
+    background: white;
+
+    border-color: white;
+
+    color: #111827;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+}
+
+
+.hero-actions .btn-primary:hover {
+
+    background: #f8fafc;
+
+    border-color: #f8fafc;
+
+    color: #111827;
+
+    transform: translateY(-2px);
+}
+
+
+.hero-actions .btn-outline-light {
+
+    background: rgba(255,255,255,.06);
+
+    border-color: rgba(255,255,255,.35);
+
+    color: white;
+
+    backdrop-filter: blur(6px);
+}
+
+
+.hero-actions .btn-outline-light:hover {
+
+    background: white;
+
+    border-color: white;
+
+    color: #111827;
+}
+
+
+.hero-pills {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+
+.hero-pill {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 11px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    color: rgba(255,255,255,.78);
+
+    font-size: 12px;
+
+    backdrop-filter: blur(7px);
+}
+
+
+.hero-pill i {
+    color: #bfdbfe;
+}
+
+
+/* =========================================================
+   TRUST BAND
+========================================================= */
+
+.trust-band {
+
+    padding: 28px 20px;
+
+    margin-top: 22px;
+
+    border: 1px solid var(--tv-border);
+
+    border-radius: 22px;
+
+    background: white;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.04);
+}
+
+
+.trust-band strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--tv-dark);
+
+    font-size: 24px;
+
+    letter-spacing: -.04em;
+}
+
+
+.trust-band p {
+
+    margin: 0;
+
+    color: var(--tv-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section-block {
+
+    margin: 95px 0;
+}
+
+
+.section-heading {
+
+    margin-bottom: 34px;
+}
+
+
+.section-kicker {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--tv-blue);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+}
+
+
+.section-heading h2 {
+
+    margin: 0 0 10px;
+
+    color: var(--tv-dark);
+
+    font-size: clamp(30px, 4vw, 46px);
+
+    line-height: 1.08;
+
+    letter-spacing: -.05em;
+
+    font-weight: 750;
+}
+
+
+.section-heading p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color: var(--tv-muted);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   CATEGORY HEADER
+========================================================= */
+
+.category-heading {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.explore-categories-btn {
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 13px 18px;
+
+    border: 1px solid var(--tv-border);
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: var(--tv-dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.explore-categories-btn:hover {
+
+    background: var(--tv-dark);
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(15,23,42,.12);
+}
+
+
+.explore-categories-btn i {
+
+    transition:
+        transform .25s ease;
+}
+
+
+.explore-categories-btn:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
+
+.category-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.category-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    min-height: 155px;
+
+    padding: 24px;
+
+    border: 1px solid var(--tv-border);
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: var(--tv-dark);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.category-card:hover {
+
+    color: var(--tv-dark);
+
+    transform: translateY(-6px);
+
+    border-color: #d6e2f5;
+
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.08);
+}
+
+
+.category-icon {
+
+    flex-shrink: 0;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #f1f5f9;
+
+    color: var(--tv-blue);
+
+    font-size: 21px;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+
+.category-card:hover .category-icon {
+
+    background: var(--tv-blue);
+
+    color: white;
+
+    transform: scale(1.05);
+}
+
+
+.category-card h3 {
+
+    margin: 0 0 5px;
+
+    color: var(--tv-dark);
+
+    font-size: 17px;
+
+    font-weight: 750;
+
+    letter-spacing: -.02em;
+}
+
+
+.category-card p {
+
+    margin: 0;
+
+    max-width: 140px;
+
+    color: var(--tv-muted);
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+.category-arrow {
+
+    position: absolute;
+
+    right: 18px;
+
+    bottom: 17px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    transition: .25s ease;
+}
+
+
+.category-card:hover .category-arrow {
+
+    color: var(--tv-blue);
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.feature-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.feature-card {
+
+    padding: 28px;
+
+    border: 1px solid var(--tv-border);
+
+    border-radius: 20px;
+
+    background: white;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.feature-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.07);
+}
+
+
+.feature-card > i {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 20px;
+
+    border-radius: 14px;
+
+    background: var(--tv-blue-light);
+
+    color: var(--tv-blue);
+
+    font-size: 19px;
+}
+
+
+.feature-card h3 {
+
+    margin: 0 0 8px;
+
+    color: var(--tv-dark);
+
+    font-size: 17px;
+
+    letter-spacing: -.02em;
+}
+
+
+.feature-card p {
+
+    margin: 0;
+
+    color: var(--tv-muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.product-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+.product-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid var(--tv-border);
+
+    border-radius: 22px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px rgba(15,23,42,.04);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.product-card:hover {
+
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.09);
+}
+
+
+.product-media {
+
+    position: relative;
+
+    height: 250px;
+
+    overflow: hidden;
+
+    background: #f8fafc;
+}
+
+
+.product-media img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .4s ease;
+}
+
+
+.product-card:hover .product-media img {
+
+    transform: scale(1.04);
+}
+
+
+.product-placeholder {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+.wishlist-form {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    z-index: 5;
+}
+
+
+.wishlist-btn {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.94);
+
+    color: #64748b;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 18px rgba(15,23,42,.13);
+
+    transition:
+        transform .25s ease,
+        color .25s ease,
+        background .25s ease;
+}
+
+
+.wishlist-btn:hover {
+
+    color: #ef4444;
+
+    background: white;
+
+    transform: scale(1.1);
+}
+
+
+/* =========================================================
+   PRODUCT BODY
+========================================================= */
+
+.product-body {
+
+    padding: 22px;
+}
+
+
+.product-title {
+
+    min-height: 45px;
+
+    margin: 0 0 15px;
+
+    color: var(--tv-dark);
+
+    font-size: 17px;
+
+    line-height: 1.35;
+
+    letter-spacing: -.02em;
+}
+
+
+.product-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+.stock-pill {
+
+    display: inline-flex;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.stock-pill.available {
+
+    background: #ecfdf5;
+
+    color: #047857;
+}
+
+
+.stock-pill.soldout {
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+}
+
+
+.price {
+
+    color: var(--tv-blue);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PRODUCT ACTIONS
+========================================================= */
+
+.product-actions {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.product-actions form {
+
+    flex: 1;
+
+    margin: 0;
+}
+
+
+.product-actions .btn {
+
+    width: 100%;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    padding: 10px 12px;
+}
+
+
+.product-actions .btn-primary {
+
+    background: var(--tv-dark);
+
+    border-color: var(--tv-dark);
+}
+
+
+.product-actions .btn-primary:hover {
+
+    background: var(--tv-blue);
+
+    border-color: var(--tv-blue);
+}
+
+
+.product-actions .btn:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EDITORIAL
+========================================================= */
+
+.editorial-banner {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 540px;
+
+    margin: 110px 0 70px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background: #e5e7eb;
+
+    box-shadow:
+        0 25px 70px rgba(15,23,42,.12);
+}
+
+
+.editorial-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    transform: scale(1.01);
+}
+
+
+.editorial-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(15,23,42,.67) 0%,
+            rgba(15,23,42,.38) 28%,
+            rgba(15,23,42,.10) 52%,
+            rgba(15,23,42,0) 75%
+        );
+}
+
+
+.editorial-content {
+
+    position: absolute;
+
+    left: 62px;
+
+    bottom: 58px;
+
+    z-index: 2;
+
+    max-width: 500px;
+
+    color: white;
+}
+
+
+.editorial-kicker {
+
+    display: inline-block;
+
+    margin-bottom: 17px;
+
+    color: rgba(255,255,255,.85);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+}
+
+
+.editorial-content h2 {
+
+    margin: 0 0 18px;
+
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(40px, 4.5vw, 62px);
+
+    line-height: 1.02;
+
+    letter-spacing: -.045em;
+
+    font-weight: 500;
+}
+
+
+.editorial-content p {
+
+    max-width: 430px;
+
+    margin: 0 0 27px;
+
+    color: rgba(255,255,255,.88);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+}
+
+
+.editorial-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 20px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: var(--tv-dark);
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.editorial-btn:hover {
+
+    color: var(--tv-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.2);
+}
+
+
+.editorial-btn i {
+
+    transition:
+        transform .25s ease;
+}
+
+
+.editorial-btn:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+
+    grid-column: 1 / -1;
+
+    padding: 55px;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 20px;
+
+    background: white;
+
+    text-align: center;
+
+    color: var(--tv-muted);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+
+    position: fixed;
+
+    right: 22px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 1040;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.quick-action-btn {
+
+    position: relative;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.97);
+
+    color: #334155;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(15,23,42,.12);
+
+    transition:
+        transform .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.quick-action-btn:hover {
+
+    color: var(--tv-blue);
+
+    border-color: #bfdbfe;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 12px 30px rgba(37,99,235,.15);
+}
+
+
+.quick-action-count {
+
+    position: absolute;
+
+    top: -4px;
+
+    right: -3px;
+
+    min-width: 19px;
+
+    height: 19px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 5px;
+
+    border-radius: 20px;
+
+    background: var(--tv-blue);
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    border: 2px solid white;
+}
+
+
+/* =========================================================
+   DRAWERS
+========================================================= */
+
+.quick-drawer {
+
+    width: 390px !important;
+
+    max-width: 92vw;
+
+    border: none !important;
+
+    background: white !important;
+
+    box-shadow:
+        -15px 0 50px rgba(15,23,42,.12);
+}
+
+
+.quick-drawer-header {
+
+    padding: 25px 25px 20px;
+
+    border-bottom: 1px solid #eef2f7;
+
+    background: white;
+}
+
+
+.quick-drawer-kicker {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--tv-blue);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+}
+
+
+.quick-drawer-header .offcanvas-title {
+
+    color: var(--tv-dark);
+
+    font-size: 22px;
+
+    font-weight: 750;
+
+    letter-spacing: -.03em;
+}
+
+
+.quick-drawer .offcanvas-body {
+
+    padding: 22px;
+
+    background: white;
+}
+
+
+/* =========================================================
+   QUICK ITEMS
+========================================================= */
+
+.quick-items {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+.quick-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 12px;
+
+    border: 1px solid #e8edf3;
+
+    border-radius: 15px;
+
+    background: white;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.quick-item:hover {
+
+    border-color: #dbeafe;
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.05);
+}
+
+
+.quick-item-image {
+
+    flex-shrink: 0;
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    color: #94a3b8;
+}
+
+
+.quick-item-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.quick-item-info {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.quick-item-info h6 {
+
+    margin: 0 0 5px;
+
+    color: #0f172a;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+.quick-item-info p {
+
+    margin: 0 0 3px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+.quick-item-info strong {
+
+    display: block;
+
+    color: var(--tv-blue);
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.quick-item-link {
+
+    display: inline-block;
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.quick-item-link:hover {
+
+    color: var(--tv-blue);
+}
+
+
+/* =========================================================
+   CART TOTAL
+========================================================= */
+
+.quick-cart-total {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+.quick-cart-total span {
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.quick-cart-total strong {
+
+    color: var(--tv-dark);
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   QUICK VIEW
+========================================================= */
+
+.quick-view-btn {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 13px 16px;
+
+    border-radius: 11px;
+
+    background: var(--tv-dark);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.quick-view-btn:hover {
+
+    background: var(--tv-blue);
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+.quick-view-btn i {
+
+    transition:
+        transform .2s ease;
+}
+
+
+.quick-view-btn:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EMPTY DRAWER
+========================================================= */
+
+.quick-empty {
+
+    min-height: 420px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+.quick-empty-icon {
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    color: var(--tv-blue);
+
+    font-size: 23px;
+}
+
+
+.quick-empty-icon.wishlist-icon {
+
+    background: #fff1f2;
+
+    color: #ef4444;
+}
+
+
+.quick-empty h5 {
+
+    margin: 0 0 8px;
+
+    color: var(--tv-dark);
+
+    font-size: 17px;
+
+    font-weight: 750;
+}
+
+
+.quick-empty p {
+
+    max-width: 260px;
+
+    margin: 0 0 20px;
+
+    color: var(--tv-muted);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .hero-content {
+        padding: 55px;
+    }
+
+    .category-grid,
+    .product-grid,
+    .feature-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .hero-shell {
+
+        min-height: 620px;
+
+        border-radius: 24px;
+    }
+
+    .hero-image {
+
+        object-position: 60% center;
+    }
+
+    .hero-overlay {
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(8,12,18,.18) 0%,
+                rgba(8,12,18,.45) 38%,
+                rgba(8,12,18,.84) 100%
+            );
+    }
+
+    .hero-content {
+
+        min-height: 620px;
+
+        align-items: flex-end;
+
+        padding: 35px 28px;
+    }
+
+    .hero-copy {
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+
+        font-size: 46px;
+
+        letter-spacing: -.055em;
+    }
+
+    .hero-content p {
+
+        font-size: 15px;
+
+        line-height: 1.55;
+    }
+
+    .hero-actions {
+
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .hero-pills {
+        gap: 7px;
+    }
+
+    .category-heading {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .explore-categories-btn {
+        width: 100%;
+    }
+
+    .section-block {
+        margin: 70px 0;
+    }
+
+    .editorial-banner {
+
+        height: 560px;
+
+        margin: 80px 0 45px;
+
+        border-radius: 24px;
+    }
+
+    .editorial-overlay {
+
+        background:
+            linear-gradient(
+                0deg,
+                rgba(15,23,42,.80) 0%,
+                rgba(15,23,42,.42) 48%,
+                rgba(15,23,42,.05) 100%
+            );
+    }
+
+    .editorial-content {
+
+        left: 28px;
+
+        right: 28px;
+
+        bottom: 35px;
+    }
+
+    .editorial-content h2 {
+        font-size: 44px;
+    }
+
+    .quick-actions {
+
+        right: 15px;
+
+        bottom: 18px;
+
+        top: auto;
+
+        transform: none;
+
+        flex-direction: row;
+    }
+
+    .quick-action-btn {
+
+        width: 48px;
+        height: 48px;
+    }
+
+    .quick-drawer {
+
+        width: 100% !important;
+
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .category-grid,
+    .product-grid,
+    .feature-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero-shell,
+    .hero-content {
+
+        min-height: 650px;
+    }
+
+    .hero-content {
+
+        padding: 28px 22px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .hero-badge {
+
+        font-size: 10px;
+
+        letter-spacing: .12em;
+    }
+
+    .trust-band {
+        padding: 20px 10px;
+    }
+
+    .trust-band strong {
+        font-size: 20px;
+    }
+
+    .editorial-content h2 {
+        font-size: 38px;
+    }
+
+    .editorial-content p {
+        font-size: 14px;
+    }
+
+    .editorial-btn {
+
+        width: 100%;
+
+        justify-content: center;
+    }
+}
+
+</style>
+
+
+<div class="home-page">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero-shell">
+
+    <img
+        src="{% static 'store/images/techhero.png' %}"
+        alt="Modern technology setup"
+        class="hero-image"
+    >
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-copy">
+
+            <div class="hero-badge">
+                TechVerse • Modern technology
+            </div>
+
+            <h1>
+                Technology
+                <span class="hero-title-accent">
+                    that fits you.
+                </span>
+            </h1>
+
+            <p>
+                Curated tech for work, play,
+                creativity, and everything in between.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    href="{% url 'products' %}"
+                    class="btn btn-primary btn-lg"
+                >
+                    Shop the collection
+                </a>
+
+                <a
+                    href="#categories"
+                    class="btn btn-outline-light btn-lg"
+                >
+                    Explore categories
+                </a>
+
+            </div>
+
+            <div class="hero-pills mt-4">
+
+                <span class="hero-pill">
+                    <i class="fa-solid fa-bolt"></i>
+                    Fast delivery
+                </span>
+
+                <span class="hero-pill">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Secure checkout
+                </span>
+
+                <span class="hero-pill">
+                    <i class="fa-solid fa-headset"></i>
+                    Expert support
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRUST BAND
+===================================================== -->
+
+<section class="trust-band mb-5">
+
+    <div class="row g-3 text-center">
+
+        <div class="col-md-3 col-6">
+            <strong>4.9/5</strong>
+            <p>Customer rating</p>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <strong>24h</strong>
+            <p>Express shipping</p>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <strong>100%</strong>
+            <p>Secure checkout</p>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <strong>500+</strong>
+            <p>Premium products</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section id="categories" class="section-block">
+
+    <div class="section-heading category-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                Shop the essentials
+            </span>
+
+            <h2>
+                Find your next favourite.
+            </h2>
+
+            <p>
+                Start with the essentials, then explore
+                everything TechVerse has to offer.
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'products' %}"
+            class="explore-categories-btn"
+        >
+            Explore all categories
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+
+    <div class="category-grid">
+
+        <a
+            href="{% url 'category_products' 'laptop' %}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                <i class="fa-solid fa-laptop"></i>
+            </div>
+
+            <div>
+                <h3>Laptops</h3>
+                <p>Power for work & creativity.</p>
+            </div>
+
+            <span class="category-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+        </a>
+
+
+        <a
+            href="{% url 'category_products' 'audio' %}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                <i class="fa-solid fa-headphones"></i>
+            </div>
+
+            <div>
+                <h3>Audio</h3>
+                <p>Sound that surrounds you.</p>
+            </div>
+
+            <span class="category-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+        </a>
+
+
+        <a
+            href="{% url 'category_products' 'accessories' %}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                <i class="fa-solid fa-keyboard"></i>
+            </div>
+
+            <div>
+                <h3>Accessories</h3>
+                <p>Complete your setup.</p>
+            </div>
+
+            <span class="category-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+        </a>
+
+
+        <a
+            href="{% url 'category_products' 'mobile' %}"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+
+            <div>
+                <h3>Mobile</h3>
+                <p>Power in your pocket.</p>
+            </div>
+
+            <span class="category-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHY TECHVERSE
+===================================================== -->
+
+<section class="section-block">
+
+    <div class="section-heading">
+
+        <span class="section-kicker">
+            Why TechVerse
+        </span>
+
+        <h2>
+            From checkout to delivery,
+            everything feels premium.
+        </h2>
+
+        <p>
+            We keep the experience simple:
+            great technology, transparent shopping,
+            and reliable service.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <h3>
+                Fast delivery
+            </h3>
+
+            <p>
+                Quick dispatch and reliable shipping
+                for your latest tech.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>
+                Secure shopping
+            </h3>
+
+            <p>
+                Protected payments and a trusted
+                checkout experience.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-gem"></i>
+
+            <h3>
+                Premium quality
+            </h3>
+
+            <p>
+                Carefully selected products focused
+                on performance and style.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <h3>
+                Expert support
+            </h3>
+
+            <p>
+                Friendly guidance whenever you
+                need help choosing your next device.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NEW ARRIVALS
+===================================================== -->
+
+<section class="section-block">
+
+    <div class="section-heading">
+
+        <span class="section-kicker">
+            New arrivals
+        </span>
+
+        <h2>
+            Fresh picks for your setup.
+        </h2>
+
+        <p>
+            A few of our latest additions,
+            selected for modern workspaces and everyday life.
+        </p>
+
+    </div>
+
+
+    <div class="product-grid">
+
+        {% for product in products|slice:":4" %}
+
+        <article class="product-card">
+
+            <div class="product-media">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="product-placeholder">
+                        No image available
+                    </div>
+
+                {% endif %}
+
+
+                {% if user.is_authenticated %}
+
+                <form
+                    method="post"
+                    action="{% url 'add_wishlist' product.id %}"
+                    class="wishlist-form"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ request.get_full_path }}"
+                    >
+
+                    <button
+                        type="submit"
+                        class="wishlist-btn"
+                        aria-label="Add {{ product.name }} to wishlist"
+                    >
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="product-body">
+
+                <h3 class="product-title">
+                    {{ product.name }}
+                </h3>
+
+
+                <div class="product-meta">
+
+                    {% if product.stock > 0 %}
+
+                        <span class="stock-pill available">
+                            In Stock ({{ product.stock }})
+                        </span>
+
+                    {% else %}
+
+                        <span class="stock-pill soldout">
+                            Out of Stock
+                        </span>
+
+                    {% endif %}
+
+
+                    <span class="price">
+                        Rs. {{ product.price }}
+                    </span>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                    {% if user.is_authenticated %}
+
+                    <form
+                        method="post"
+                        action="{% url 'add_to_cart' product.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            {% if product.stock <= 0 %}
+                                disabled
+                            {% endif %}
+                        >
+
+                            {% if product.stock > 0 %}
+                                Add to cart
+                            {% else %}
+                                Sold out
+                            {% endif %}
+
+                        </button>
+
+                    </form>
+
+                    {% else %}
+
+                    <a
+                        href="{% url 'login' %}?next={{ request.path }}"
+                        class="btn btn-primary"
+                    >
+                        Login to buy
+                    </a>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{% url 'product_detail' product.id %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        View
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% empty %}
+
+        <div class="empty-state">
+            No products available right now.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ALL PRODUCTS
+===================================================== -->
+
+<section id="products" class="section-block">
+
+    <div class="section-heading">
+
+        <span class="section-kicker">
+            Featured products
+        </span>
+
+        <h2>
+            Explore the collection.
+        </h2>
+
+        <p>
+            Discover more technology for your workspace,
+            entertainment setup, and everyday life.
+        </p>
+
+    </div>
+
+
+    <div class="product-grid">
+
+        {% for product in products|slice:"4:" %}
+
+        <article class="product-card">
+
+            <div class="product-media">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="product-placeholder">
+                        No image available
+                    </div>
+
+                {% endif %}
+
+
+                {% if user.is_authenticated %}
+
+                <form
+                    method="post"
+                    action="{% url 'add_wishlist' product.id %}"
+                    class="wishlist-form"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ request.get_full_path }}"
+                    >
+
+                    <button
+                        type="submit"
+                        class="wishlist-btn"
+                        aria-label="Add {{ product.name }} to wishlist"
+                    >
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="product-body">
+
+                <h3 class="product-title">
+                    {{ product.name }}
+                </h3>
+
+
+                <div class="product-meta">
+
+                    {% if product.stock > 0 %}
+
+                        <span class="stock-pill available">
+                            In Stock ({{ product.stock }})
+                        </span>
+
+                    {% else %}
+
+                        <span class="stock-pill soldout">
+                            Out of Stock
+                        </span>
+
+                    {% endif %}
+
+
+                    <span class="price">
+                        Rs. {{ product.price }}
+                    </span>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                    {% if user.is_authenticated %}
+
+                    <form
+                        method="post"
+                        action="{% url 'add_to_cart' product.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            {% if product.stock <= 0 %}
+                                disabled
+                            {% endif %}
+                        >
+
+                            {% if product.stock > 0 %}
+                                Add to cart
+                            {% else %}
+                                Sold out
+                            {% endif %}
+
+                        </button>
+
+                    </form>
+
+                    {% else %}
+
+                    <a
+                        href="{% url 'login' %}?next={{ request.path }}"
+                        class="btn btn-primary"
+                    >
+                        Login to buy
+                    </a>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{% url 'product_detail' product.id %}"
+                        class="btn btn-outline-secondary"
+                    >
+                        View
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        {% empty %}
+
+        <div class="empty-state">
+            No featured products available right now.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div style="
+        display:flex;
+        justify-content:center;
+        margin-top:40px;
+    ">
+
+        <a
+            href="{% url 'products' %}"
+            class="explore-categories-btn"
+        >
+            View all products
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL EDITORIAL BANNER
+===================================================== -->
+
+<section class="editorial-banner">
+
+    <img
+        src="{% static 'store/images/techverse-setup.png' %}"
+        alt="Beautiful modern technology workspace"
+        class="editorial-image"
+    >
+
+    <div class="editorial-overlay"></div>
+
+    <div class="editorial-content">
+
+        <span class="editorial-kicker">
+            The TechVerse Edit
+        </span>
+
+        <h2>
+            Build a setup
+            that feels like you.
+        </h2>
+
+        <p>
+            Thoughtful technology.
+            Beautiful spaces.
+            Better everyday experiences.
+        </p>
+
+        <a
+            href="{% url 'products' %}"
+            class="editorial-btn"
+        >
+            Explore the collection
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+     FLOATING QUICK ACTIONS
+===================================================== -->
+
+{% if user.is_authenticated %}
+
+<div class="quick-actions">
+
+    <!-- WISHLIST -->
+
+    <button
+        type="button"
+        class="quick-action-btn"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#quickWishlist"
+        aria-controls="quickWishlist"
+        title="Quick wishlist"
+    >
+
+        <i class="fa-regular fa-heart"></i>
+
+        {% if wishlist_count %}
+
+            <span class="quick-action-count">
+                {{ wishlist_count }}
+            </span>
+
+        {% endif %}
+
+    </button>
+
+
+    <!-- CART -->
+
+    <button
+        type="button"
+        class="quick-action-btn"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#quickCart"
+        aria-controls="quickCart"
+        title="Quick cart"
+    >
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        {% if cart_count %}
+
+            <span class="quick-action-count">
+                {{ cart_count }}
+            </span>
+
+        {% endif %}
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     QUICK CART DRAWER
+===================================================== -->
+
+<div
+    class="offcanvas offcanvas-end quick-drawer"
+    tabindex="-1"
+    id="quickCart"
+    aria-labelledby="quickCartLabel"
+>
+
+    <div class="offcanvas-header quick-drawer-header">
+
+        <div>
+
+            <span class="quick-drawer-kicker">
+                Your selection
+            </span>
+
+            <h5
+                class="offcanvas-title"
+                id="quickCartLabel"
+            >
+                Shopping Cart
+            </h5>
+
+        </div>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+        ></button>
+
+    </div>
+
+
+    <div class="offcanvas-body">
+
+        {% if cart_items %}
+
+            <div class="quick-items">
+
+                {% for item in cart_items %}
+
+                <div class="quick-item">
+
+                    <div class="quick-item-image">
+
+                        {% if item.product.image %}
+
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                            >
+
+                        {% else %}
+
+                            <i class="fa-solid fa-microchip"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="quick-item-info">
+
+                        <h6>
+                            {{ item.product.name }}
+                        </h6>
+
+                        <p>
+                            Qty: {{ item.quantity }}
+                        </p>
+
+                        <strong>
+                            Rs. {{ item.product.price }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="quick-cart-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    Rs. {{ cart_total }}
+                </strong>
+
+            </div>
+
+
+            <a
+                href="{% url 'cart' %}"
+                class="quick-view-btn"
+            >
+                View full cart
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        {% else %}
+
+            <div class="quick-empty">
+
+                <div class="quick-empty-icon">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </div>
+
+                <h5>
+                    Your cart is empty
+                </h5>
+
+                <p>
+                    Add something you love and
+                    it will appear here.
+                </p>
+
+                <a
+                    href="{% url 'products' %}"
+                    class="quick-view-btn"
+                >
+                    Start shopping
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     QUICK WISHLIST DRAWER
+===================================================== -->
+
+<div
+    class="offcanvas offcanvas-end quick-drawer"
+    tabindex="-1"
+    id="quickWishlist"
+    aria-labelledby="quickWishlistLabel"
+>
+
+    <div class="offcanvas-header quick-drawer-header">
+
+        <div>
+
+            <span class="quick-drawer-kicker">
+                Saved for later
+            </span>
+
+            <h5
+                class="offcanvas-title"
+                id="quickWishlistLabel"
+            >
+                Wishlist
+            </h5>
+
+        </div>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+        ></button>
+
+    </div>
+
+
+    <div class="offcanvas-body">
+
+        {% if wishlist_items %}
+
+            <div class="quick-items">
+
+                {% for item in wishlist_items %}
+
+                <div class="quick-item">
+
+                    <div class="quick-item-image">
+
+                        {% if item.product.image %}
+
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                            >
+
+                        {% else %}
+
+                            <i class="fa-solid fa-microchip"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="quick-item-info">
+
+                        <h6>
+                            {{ item.product.name }}
+                        </h6>
+
+                        <strong>
+                            Rs. {{ item.product.price }}
+                        </strong>
+
+                        <a
+                            href="{% url 'product_detail' item.product.id %}"
+                            class="quick-item-link"
+                        >
+                            View product
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <a
+                href="{% url 'wishlist' %}"
+                class="quick-view-btn"
+            >
+                View wishlist
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        {% else %}
+
+            <div class="quick-empty">
+
+                <div class="quick-empty-icon wishlist-icon">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </div>
+
+                <h5>
+                    Your wishlist is empty
+                </h5>
+
+                <p>
+                    Save products you love and
+                    find them here later.
+                </p>
+
+                <a
+                    href="{% url 'products' %}"
+                    class="quick-view-btn"
+                >
+                    Explore products
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}

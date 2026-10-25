@@ -1,0 +1,1561 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="register-page">
+
+    <div class="register-card">
+
+        <!-- =====================================================
+             LEFT SIDE
+        ====================================================== -->
+
+        <div class="register-visual">
+
+            <div class="visual-glow glow-one"></div>
+            <div class="visual-glow glow-two"></div>
+
+            <div class="visual-content">
+
+                <div class="logo-circle">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+                <span class="visual-label">
+                    WELCOME
+                </span>
+
+                <h2>
+                    Join Our Store
+                </h2>
+
+                <p>
+                    Create your account and discover
+                    a smoother, smarter shopping experience.
+                </p>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+
+                    <div>
+                        <strong>Easy Shopping</strong>
+
+                        <span>
+                            Browse and shop with ease.
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <div>
+                        <strong>Your Wishlist</strong>
+
+                        <span>
+                            Save products you love.
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+
+                    <div>
+                        <strong>Track Orders</strong>
+
+                        <span>
+                            Keep an eye on every purchase.
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="visual-bottom">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Your account is protected.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT SIDE
+        ====================================================== -->
+
+        <div class="register-form">
+
+            <div class="form-header">
+
+                <span class="welcome">
+                    GET STARTED
+                </span>
+
+                <h1>
+                    Create Account
+                </h1>
+
+                <p>
+                    Fill in your details to get started.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 REGISTRATION FORM
+            ================================================= -->
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <!-- =================================================
+                     DISPLAY DJANGO MESSAGES
+                ================================================= -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="message-box {{ message.tags }}">
+
+                            {% if message.tags == "error" %}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {% elif message.tags == "success" %}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-info"></i>
+                            {% endif %}
+
+                            <span>
+                                {{ message }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     FIRST NAME / LAST NAME
+                ================================================= -->
+
+                <div class="input-row">
+
+                    <div class="input-group">
+
+                        <label for="first_name">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            First Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            value="{{ request.POST.first_name|default:'' }}"
+                            placeholder="Enter first name"
+                            autocomplete="given-name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="last_name">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Last Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            value="{{ request.POST.last_name|default:'' }}"
+                            placeholder="Enter last name"
+                            autocomplete="family-name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     USERNAME
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="username">
+
+                        <i class="fa-solid fa-at"></i>
+
+                        Username
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value="{{ request.POST.username|default:'' }}"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="email">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        Email Address
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ request.POST.email|default:'' }}"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     MIDDLE NAME
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="middle_name">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        Middle Name
+
+                        <span class="optional">
+                            optional
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="middle_name"
+                        name="middle_name"
+                        value="{{ request.POST.middle_name|default:'' }}"
+                        placeholder="Enter middle name"
+                        autocomplete="additional-name"
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     PHONE
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="phone">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        Phone Number
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="{{ request.POST.phone|default:'' }}"
+                        placeholder="Enter phone number"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     ADDRESS
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="address">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Address
+
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter your address"
+                        autocomplete="street-address"
+                        required
+                    >{{ request.POST.address|default:'' }}</textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     PASSWORD
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="password">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     CONFIRM PASSWORD
+                ================================================= -->
+
+                <div class="input-group">
+
+                    <label for="confirm_password">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Confirm Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Repeat your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     PASSWORD TIP
+                ================================================= -->
+
+                <div class="password-tip">
+
+                    <div class="tip-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+
+                    <div class="tip-content">
+
+                        <strong>
+                            Keep it secure
+                        </strong>
+
+                        <span>
+                            Use letters, numbers and symbols.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SUBMIT
+                ================================================= -->
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+
+                    <span>
+                        Create My Account
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- =================================================
+                 LOGIN LINK
+            ================================================= -->
+
+            <div class="login-link">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="{% url 'login' %}">
+                    Sign In
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.register-page *,
+.register-page *::before,
+.register-page *::after {
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.register-page {
+
+    min-height: 100vh;
+
+    padding: 45px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-family:
+        'Poppins',
+        'Segoe UI',
+        sans-serif;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255,255,255,.05),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(255,255,255,.04),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #08090c,
+            #111318,
+            #08090c
+        );
+
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.register-card {
+
+    width: min(1080px, 100%);
+
+    min-height: 720px;
+
+    display: grid;
+
+    grid-template-columns: 40% 60%;
+
+    background: #ffffff;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.45);
+
+}
+
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.register-visual {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 55px;
+
+    color: white;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #090a0d,
+            #111318 55%,
+            #050608
+        );
+
+}
+
+
+/* =========================================================
+   DECORATIVE GLOWS
+========================================================= */
+
+.visual-glow {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(5px);
+
+}
+
+
+.glow-one {
+
+    width: 280px;
+
+    height: 280px;
+
+    top: -150px;
+
+    right: -130px;
+
+    background:
+        rgba(255,255,255,.055);
+
+}
+
+
+.glow-two {
+
+    width: 330px;
+
+    height: 330px;
+
+    bottom: -180px;
+
+    left: -160px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+/* =========================================================
+   VISUAL CONTENT
+========================================================= */
+
+.visual-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 340px;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-circle {
+
+    width: 76px;
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+    border-radius: 22px;
+
+    color: white;
+
+    font-size: 28px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #292b31,
+            #111216
+        );
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.4);
+
+}
+
+
+/* =========================================================
+   VISUAL LABEL
+========================================================= */
+
+.visual-label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #a1a1aa;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =========================================================
+   VISUAL HEADING
+========================================================= */
+
+.visual-content h2 {
+
+    margin: 0 0 16px;
+
+    color: #ffffff;
+
+    font-size: 38px;
+
+    line-height: 1.12;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+}
+
+
+/* =========================================================
+   VISUAL PARAGRAPH
+========================================================= */
+
+.visual-content > p {
+
+    margin: 0 0 35px;
+
+    color: #a1a1aa;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin: 20px 0;
+
+}
+
+
+/* =========================================================
+   FEATURE ICON
+========================================================= */
+
+.feature-icon {
+
+    flex: 0 0 42px;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #ffffff;
+
+    background: #181a1f;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   FEATURE TEXT
+========================================================= */
+
+.feature strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #f4f4f5;
+
+    font-size: 13px;
+
+}
+
+
+.feature span {
+
+    color: #71717a;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   VISUAL BOTTOM
+========================================================= */
+
+.visual-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 42px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    color: #71717a;
+
+    font-size: 11px;
+
+}
+
+
+.visual-bottom i {
+
+    color: #d4d4d8;
+
+}
+
+
+/* =========================================================
+   RIGHT FORM
+========================================================= */
+
+.register-form {
+
+    padding: 50px 58px;
+
+    background: #ffffff;
+
+    overflow-y: auto;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.form-header {
+
+    margin-bottom: 28px;
+
+}
+
+
+.welcome {
+
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #52525b;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+}
+
+
+.form-header h1 {
+
+    margin: 0;
+
+    color: #18181b;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+
+}
+
+
+.form-header p {
+
+    margin: 8px 0 0;
+
+    color: #71717a;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   INPUT ROW
+========================================================= */
+
+.input-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+
+}
+
+
+/* =========================================================
+   INPUT GROUP
+========================================================= */
+
+.input-group {
+
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 17px;
+
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.input-group label {
+
+    display: block;
+
+    width: 100%;
+
+    margin: 0 0 8px;
+
+    color: #27272a;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+
+}
+
+
+.input-group label i {
+
+    margin-right: 6px;
+
+    color: #3f3f46;
+
+}
+
+
+.optional {
+
+    margin-left: 4px;
+
+    color: #a1a1aa;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.input-group input,
+.input-group textarea {
+
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    margin: 0;
+
+    border: 1px solid #e4e4e7;
+
+    border-radius: 13px;
+
+    background: #fafafa;
+
+    color: #18181b;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    transition: .2s;
+
+}
+
+
+/* =========================================================
+   INPUT HEIGHT
+========================================================= */
+
+.input-group input {
+
+    height: 52px;
+
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.input-group textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+
+}
+
+
+/* =========================================================
+   INPUT HOVER
+========================================================= */
+
+.input-group input:hover,
+.input-group textarea:hover {
+
+    border-color: #a1a1aa;
+
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+========================================================= */
+
+.input-group input:focus,
+.input-group textarea:focus {
+
+    outline: none;
+
+    background: #ffffff;
+
+    border-color: #52525b;
+
+    box-shadow:
+        0 0 0 4px rgba(24,24,27,.06);
+
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+
+    color: #a1a1aa;
+
+}
+
+
+/* =========================================================
+   PASSWORD TIP
+========================================================= */
+
+.password-tip {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    margin: 7px 0 22px;
+
+    border: 1px solid #e4e4e7;
+
+    border-radius: 14px;
+
+    background: #f8f8f8;
+
+}
+
+
+/* =========================================================
+   TIP ICON
+========================================================= */
+
+.tip-icon {
+
+    flex: 0 0 42px;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #18181b;
+
+    color: white;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+   TIP CONTENT
+========================================================= */
+
+.tip-content {
+
+    min-width: 0;
+
+}
+
+
+.password-tip strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #18181b;
+
+    font-size: 12px;
+
+}
+
+
+.password-tip span {
+
+    display: block;
+
+    color: #71717a;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   REGISTER BUTTON
+========================================================= */
+
+.register-btn {
+
+    width: 100%;
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    margin: 0;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #18181b,
+            #27272a
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.18);
+
+    transition: .25s;
+
+}
+
+
+.register-btn:hover {
+
+    transform: translateY(-2px);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #09090b,
+            #18181b
+        );
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.25);
+
+}
+
+
+.register-btn i {
+
+    transition: .25s;
+
+}
+
+
+.register-btn:hover i {
+
+    transform: translateX(5px);
+
+}
+
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.login-link {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 22px;
+
+    color: #71717a;
+
+    font-size: 12px;
+
+}
+
+
+.login-link a {
+
+    color: #18181b;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+}
+
+
+.login-link a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================================
+   MESSAGE BOX
+========================================================= */
+
+.message-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* error */
+
+.message-box.error {
+
+    color: #991b1b;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+}
+
+
+/* success */
+
+.message-box.success {
+
+    color: #166534;
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+
+}
+
+
+/* warning */
+
+.message-box.warning {
+
+    color: #92400e;
+
+    background: #fffbeb;
+
+    border: 1px solid #fde68a;
+
+}
+
+
+/* info */
+
+.message-box.info {
+
+    color: #1e40af;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width: 850px) {
+
+    .register-card {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .register-visual {
+
+        min-height: 320px;
+
+        padding: 40px;
+
+    }
+
+
+    .visual-content {
+
+        max-width: 520px;
+
+    }
+
+
+    .feature {
+
+        display: none;
+
+    }
+
+
+    .visual-bottom {
+
+        margin-top: 25px;
+
+    }
+
+
+    .register-form {
+
+        padding: 40px 35px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width: 550px) {
+
+    .register-page {
+
+        padding: 12px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .register-card {
+
+        border-radius: 20px;
+
+        margin-top: 10px;
+
+    }
+
+
+    .register-visual {
+
+        min-height: 250px;
+
+        padding: 30px;
+
+    }
+
+
+    .logo-circle {
+
+        width: 60px;
+
+        height: 60px;
+
+        margin-bottom: 18px;
+
+        border-radius: 18px;
+
+        font-size: 23px;
+
+    }
+
+
+    .visual-content h2 {
+
+        font-size: 29px;
+
+    }
+
+
+    .visual-content > p {
+
+        margin-bottom: 0;
+
+    }
+
+
+    .visual-bottom {
+
+        display: none;
+
+    }
+
+
+    .register-form {
+
+        padding: 30px 20px;
+
+    }
+
+
+    .form-header h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    .input-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+
+    .input-group {
+
+        margin-bottom: 16px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,2177 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   TECHVERSE PRODUCTS PAGE
+========================================================= */
+
+.products-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 25px 20px 90px;
+    color: #0f172a;
+}
+
+.products-page a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   MANUAL SWIPE HERO CAROUSEL
+========================================================= */
+
+.products-carousel {
+    position: relative;
+
+    width: 100%;
+    height: 560px;
+
+    margin-bottom: 75px;
+
+    display: flex;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    border-radius: 30px;
+
+    background: #0f172a;
+
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, .14);
+
+    /*
+       Makes touch swiping feel natural
+    */
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-x;
+}
+
+.products-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================================
+   SLIDE
+========================================================= */
+
+.product-slide {
+    position: relative;
+
+    flex: 0 0 100%;
+
+    width: 100%;
+    height: 560px;
+
+    scroll-snap-align: start;
+
+    overflow: hidden;
+
+    background: #e2e8f0;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.product-slide-image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transform: scale(1.01);
+
+    transition:
+        transform .8s ease;
+}
+
+
+/* Slight zoom when hovering */
+
+.product-slide:hover .product-slide-image {
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.product-slide::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(15, 23, 42, .70) 0%,
+            rgba(15, 23, 42, .40) 30%,
+            rgba(15, 23, 42, .12) 58%,
+            rgba(15, 23, 42, 0) 80%
+        );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.product-slide-content {
+    position: absolute;
+
+    z-index: 3;
+
+    left: 58px;
+    bottom: 65px;
+
+    max-width: 570px;
+
+    color: white;
+
+    pointer-events: none;
+}
+
+
+/*
+   Allow the button to be clicked even though
+   the content itself doesn't interfere with swipe.
+*/
+
+.product-slide-content .slide-btn {
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.slide-kicker {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 17px;
+
+    color: rgba(255, 255, 255, .88);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+}
+
+.slide-kicker i {
+    color: #bfdbfe;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.product-slide-content h1 {
+    margin: 0 0 15px;
+
+    color: white;
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: .98;
+
+    letter-spacing: -.055em;
+
+    font-weight: 750;
+
+    text-shadow:
+        0 4px 25px rgba(0, 0, 0, .18);
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.product-slide-content p {
+    max-width: 450px;
+
+    margin: 0 0 25px;
+
+    color: rgba(255, 255, 255, .90);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, .18);
+}
+
+
+/* =========================================================
+   HERO BUTTON
+========================================================= */
+
+.slide-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 19px;
+
+    border-radius: 11px;
+
+    background: white;
+
+    color: #0f172a;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, .12);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.slide-btn:hover {
+    color: #0f172a;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, .20);
+}
+
+.slide-btn i {
+    transition:
+        transform .25s ease;
+}
+
+.slide-btn:hover i {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   SWIPE HINT
+========================================================= */
+
+.swipe-hint {
+    position: absolute;
+
+    z-index: 8;
+
+    right: 25px;
+    bottom: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    background: rgba(15, 23, 42, .40);
+
+    color: rgba(255,255,255,.85);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .04em;
+
+    backdrop-filter: blur(10px);
+
+    pointer-events: none;
+}
+
+.swipe-hint i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   CAROUSEL DOTS
+========================================================= */
+
+.carousel-dots {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 24px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+
+    border-radius: 30px;
+
+    background: rgba(15, 23, 42, .35);
+
+    backdrop-filter: blur(10px);
+
+    pointer-events: none;
+}
+
+.carousel-dot {
+    display: block;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .55);
+}
+
+.carousel-dot:first-child {
+    width: 22px;
+
+    border-radius: 20px;
+
+    background: white;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 28px;
+}
+
+.section-kicker {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: clamp(30px, 4vw, 43px);
+
+    line-height: 1.05;
+
+    letter-spacing: -.045em;
+
+    font-weight: 750;
+}
+
+.section-description {
+    margin: 9px 0 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
+
+.category-box {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 17px;
+
+    margin-bottom: 75px;
+}
+
+.category-card {
+    position: relative;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #0f172a;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.category-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -50px;
+    bottom: -50px;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    transition: .3s ease;
+}
+
+.category-card:hover {
+    color: #0f172a;
+
+    transform: translateY(-5px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, .09);
+}
+
+.category-card:hover::after {
+    background: #dbeafe;
+
+    transform: scale(1.25);
+}
+
+.category-icon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 20px;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+.category-card:hover .category-icon {
+    background: #2563eb;
+
+    color: white;
+
+    transform: scale(1.05);
+}
+
+.category-card h3 {
+    position: relative;
+
+    z-index: 2;
+
+    margin: 0 0 5px;
+
+    font-size: 16px;
+
+    font-weight: 750;
+}
+
+.category-card span {
+    position: relative;
+
+    z-index: 2;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PRODUCTS TOOLBAR
+========================================================= */
+
+.products-toolbar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+    padding: 16px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, .045);
+}
+
+.filter {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.filter a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    background: #f1f5f9;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.filter a:hover,
+.filter a.active {
+    background: #0f172a;
+
+    color: white;
+}
+
+.result-count {
+    flex-shrink: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
+
+.product-card {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 21px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, .045);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #dbeafe;
+
+    box-shadow:
+        0 20px 45px rgba(15, 23, 42, .10);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
+
+.product-image {
+    position: relative;
+
+    height: 245px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #f8fafc;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform .4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.045);
+}
+
+
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+.wishlist-form {
+    position: absolute;
+
+    z-index: 5;
+
+    top: 13px;
+    right: 13px;
+}
+
+.wishlist-btn {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .94);
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, .10);
+
+    transition: .2s ease;
+}
+
+.wishlist-btn:hover {
+    color: #ef4444;
+
+    background: white;
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   PRODUCT BODY
+========================================================= */
+
+.product-body {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 20px;
+}
+
+.product-category {
+    margin-bottom: 7px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+.product-body h3 {
+    min-height: 48px;
+
+    margin: 0 0 7px;
+
+    color: #0f172a;
+
+    font-size: 17px;
+
+    line-height: 1.35;
+
+    letter-spacing: -.02em;
+}
+
+.product-description {
+    min-height: 42px;
+
+    margin: 0 0 17px;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PRODUCT META
+========================================================= */
+
+.product-meta {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: auto;
+
+    margin-bottom: 17px;
+}
+
+.stock-pill {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    white-space: nowrap;
+}
+
+.stock-pill.available {
+    background: #ecfdf5;
+
+    color: #047857;
+}
+
+.stock-pill.soldout {
+    background: #fef2f2;
+
+    color: #b91c1c;
+}
+
+.price {
+    color: #2563eb;
+
+    font-size: 17px;
+
+    font-weight: 850;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PRODUCT ACTIONS
+========================================================= */
+
+.product-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.product-actions form {
+    width: 100%;
+
+    margin: 0;
+}
+
+.add-cart-btn,
+.view-product-btn {
+    width: 100%;
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+.add-cart-btn {
+    border: 1px solid #0f172a;
+
+    background: #0f172a;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.add-cart-btn:hover:not(:disabled) {
+    border-color: #2563eb;
+
+    background: #2563eb;
+
+    color: white;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, .18);
+}
+
+.add-cart-btn:disabled {
+    opacity: .55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   VIEW PRODUCT
+========================================================= */
+
+.view-product-btn {
+    border: 1px solid #e2e8f0;
+
+    background: white;
+
+    color: #334155;
+}
+
+.view-product-btn:hover {
+    border-color: #cbd5e1;
+
+    background: #f8fafc;
+
+    color: #0f172a;
+
+    transform: translateY(-1px);
+}
+
+.view-product-btn i {
+    transition:
+        transform .2s ease;
+}
+
+.view-product-btn:hover i {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty {
+    grid-column: 1 / -1;
+
+    padding: 80px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 22px;
+
+    background: #f8fafc;
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 27px;
+}
+
+.empty h2 {
+    margin: 0 0 8px;
+
+    font-size: 24px;
+}
+
+.empty p {
+    margin: 0;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .products {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .category-box {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .products-page {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .products-carousel {
+        height: 500px;
+    }
+
+    .product-slide {
+        height: 500px;
+    }
+
+    .product-slide-content {
+        left: 35px;
+        right: 35px;
+        bottom: 58px;
+    }
+
+    .category-box {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .products {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .products-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .result-count {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .products-page {
+        padding-top: 10px;
+        padding-bottom: 60px;
+    }
+
+    .products-carousel {
+        height: 500px;
+
+        margin-bottom: 60px;
+
+        border-radius: 23px;
+    }
+
+    .product-slide {
+        height: 500px;
+    }
+
+    .product-slide::after {
+        background:
+            linear-gradient(
+                0deg,
+                rgba(15, 23, 42, .76) 0%,
+                rgba(15, 23, 42, .35) 45%,
+                rgba(15, 23, 42, .04) 100%
+            );
+    }
+
+    .product-slide-content {
+        left: 25px;
+        right: 25px;
+        bottom: 52px;
+    }
+
+    .product-slide-content h1 {
+        font-size: 42px;
+    }
+
+    .product-slide-content p {
+        font-size: 14px;
+
+        max-width: 360px;
+    }
+
+    .slide-btn {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .swipe-hint {
+        right: 15px;
+        bottom: 18px;
+    }
+
+    .carousel-dots {
+        bottom: 18px;
+    }
+
+    .category-box {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .category-card {
+        min-height: 130px;
+
+        padding: 17px;
+    }
+
+    .category-icon {
+        width: 41px;
+        height: 41px;
+
+        margin-bottom: 10px;
+
+        font-size: 17px;
+    }
+
+    .category-card h3 {
+        font-size: 14px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .product-image {
+        height: 260px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .category-box {
+        grid-template-columns: 1fr;
+    }
+
+    .product-slide-content h1 {
+        font-size: 37px;
+    }
+
+}
+
+</style>
+
+
+<div class="products-page">
+
+
+<!-- =====================================================
+     SWIPEABLE HERO
+===================================================== -->
+
+<section class="products-carousel">
+
+
+    <!-- =================================================
+         SLIDE 1 — EVERYTHING
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/allbrowse.png' %}"
+            alt="TechVerse collection"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                <i class="fa-solid fa-sparkles"></i>
+
+                TechVerse Store
+
+            </span>
+
+
+            <h1>
+                Everything you need.<br>
+                One place.
+            </h1>
+
+
+            <p>
+                Discover technology for work, play,
+                creativity, and everyday life.
+            </p>
+
+
+            <a
+                href="#collection"
+                class="slide-btn"
+            >
+
+                Explore the collection
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SLIDE 2 — PHONES
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/phone.png' %}"
+            alt="Mobile phones"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                TechVerse • Mobile
+
+            </span>
+
+
+            <h1>
+                Stay connected.<br>
+                Stay ahead.
+            </h1>
+
+
+            <p>
+                Smart devices designed to keep
+                up with your everyday.
+            </p>
+
+
+            <a
+                href="{% url 'category_products' 'mobile' %}"
+                class="slide-btn"
+            >
+
+                Explore mobiles
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SLIDE 3 — KEYBOARD + MOUSE
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/keymouse.png' %}"
+            alt="Keyboard and mouse"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                TechVerse • Accessories
+
+            </span>
+
+
+            <h1>
+                Better tools.<br>
+                Better workflow.
+            </h1>
+
+
+            <p>
+                Small upgrades that make
+                a big difference.
+            </p>
+
+
+            <a
+                href="{% url 'category_products' 'accessories' %}"
+                class="slide-btn"
+            >
+
+                Explore accessories
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SLIDE 4 — HEADPHONES
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/headphone.png' %}"
+            alt="Headphones"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                TechVerse • Audio
+
+            </span>
+
+
+            <h1>
+                Find your<br>
+                sound.
+            </h1>
+
+
+            <p>
+                Immersive audio for focus,
+                entertainment, and everything between.
+            </p>
+
+
+            <a
+                href="{% url 'category_products' 'audio' %}"
+                class="slide-btn"
+            >
+
+                Explore audio
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SLIDE 5 — CAMERA
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/camera.png' %}"
+            alt="Camera"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                TechVerse • Cameras
+
+            </span>
+
+
+            <h1>
+                Capture what<br>
+                matters.
+            </h1>
+
+
+            <p>
+                Gear for the moments
+                worth keeping.
+            </p>
+
+
+            <a
+                href="{% url 'category_products' 'cameras' %}"
+                class="slide-btn"
+            >
+
+                Explore cameras
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SLIDE 6 — BATTERY / ESSENTIALS
+    ================================================== -->
+
+    <article class="product-slide">
+
+        <img
+            src="{% static 'store/images/batterybrowse.png' %}"
+            alt="TechVerse everyday essentials"
+            class="product-slide-image"
+        >
+
+        <div class="product-slide-content">
+
+            <span class="slide-kicker">
+
+                TechVerse • Essentials
+
+            </span>
+
+
+            <h1>
+                Power your<br>
+                everyday.
+            </h1>
+
+
+            <p>
+                Discover the essentials
+                that keep you moving.
+            </p>
+
+
+            <a
+                href="#collection"
+                class="slide-btn"
+            >
+
+                Shop TechVerse
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         SWIPE HINT
+    ================================================== -->
+
+    <div class="swipe-hint">
+
+        <i class="fa-solid fa-arrows-left-right"></i>
+
+        Swipe to explore
+
+    </div>
+
+
+    <!-- =================================================
+         DOT INDICATORS
+    ================================================== -->
+
+    <div class="carousel-dots">
+
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<div class="section-header">
+
+    <div>
+
+        <span class="section-kicker">
+            Browse
+        </span>
+
+        <h2>
+            Shop by category
+        </h2>
+
+        <p class="section-description">
+            Find the right technology for your setup.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="category-box">
+
+    {% for category in categories %}
+
+    <a
+        class="category-card"
+        href="{% url 'category_products' category.slug %}"
+    >
+
+        <div class="category-icon">
+
+
+            {% if category.slug == "laptop" %}
+
+                <i class="fa-solid fa-laptop"></i>
+
+
+            {% elif category.slug == "audio" %}
+
+                <i class="fa-solid fa-headphones"></i>
+
+
+            {% elif category.slug == "accessories" %}
+
+                <i class="fa-solid fa-keyboard"></i>
+
+
+            {% elif category.slug == "mobile" %}
+
+                <i class="fa-solid fa-mobile-screen-button"></i>
+
+
+            {% elif category.slug == "cameras" %}
+
+                <i class="fa-solid fa-camera"></i>
+
+
+            {% elif category.slug == "gaming" %}
+
+                <i class="fa-solid fa-gamepad"></i>
+
+
+            {% elif category.slug == "networking" %}
+
+                <i class="fa-solid fa-network-wired"></i>
+
+
+            {% elif category.slug == "storage" %}
+
+                <i class="fa-solid fa-hard-drive"></i>
+
+
+            {% elif category.slug == "power-charging" %}
+
+                <i class="fa-solid fa-bolt"></i>
+
+
+            {% elif category.slug == "wearables" %}
+
+                <i class="fa-solid fa-clock"></i>
+
+
+            {% elif category.slug == "smart-home" %}
+
+                <i class="fa-solid fa-house"></i>
+
+
+            {% else %}
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+            {% endif %}
+
+
+        </div>
+
+
+        <h3>
+            {{ category.name }}
+        </h3>
+
+
+        <span>
+            Explore products →
+        </span>
+
+    </a>
+
+    {% endfor %}
+
+</div>
+
+
+
+<!-- =====================================================
+     COLLECTION
+===================================================== -->
+
+<section id="collection">
+
+
+    <div class="section-header">
+
+        <div>
+
+            <span class="section-kicker">
+                Collection
+            </span>
+
+
+            <h2>
+
+                {% if category %}
+
+                    {{ category.name }}
+
+                {% elif query %}
+
+                    Search results
+
+                {% else %}
+
+                    Explore the collection
+
+                {% endif %}
+
+            </h2>
+
+
+            <p class="section-description">
+
+                {% if query %}
+
+                    Results for "{{ query }}"
+
+                {% else %}
+
+                    Discover technology selected for
+                    modern work, entertainment, and everyday life.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FILTER TOOLBAR
+    ================================================== -->
+
+    <div class="products-toolbar">
+
+
+        <div class="filter">
+
+
+            <a
+                href="{% url 'products' %}"
+                class="{% if not category %}active{% endif %}"
+            >
+
+                All
+
+            </a>
+
+
+            {% for cat in categories %}
+
+
+            <a
+                href="{% url 'category_products' cat.slug %}"
+                class="{% if category and category.id == cat.id %}active{% endif %}"
+            >
+
+
+                {% if cat.slug == "laptop" %}
+
+                    <i class="fa-solid fa-laptop"></i>
+
+
+                {% elif cat.slug == "audio" %}
+
+                    <i class="fa-solid fa-headphones"></i>
+
+
+                {% elif cat.slug == "accessories" %}
+
+                    <i class="fa-solid fa-keyboard"></i>
+
+
+                {% elif cat.slug == "mobile" %}
+
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+
+
+                {% elif cat.slug == "cameras" %}
+
+                    <i class="fa-solid fa-camera"></i>
+
+
+                {% elif cat.slug == "gaming" %}
+
+                    <i class="fa-solid fa-gamepad"></i>
+
+
+                {% elif cat.slug == "networking" %}
+
+                    <i class="fa-solid fa-network-wired"></i>
+
+
+                {% elif cat.slug == "storage" %}
+
+                    <i class="fa-solid fa-hard-drive"></i>
+
+
+                {% elif cat.slug == "power-charging" %}
+
+                    <i class="fa-solid fa-bolt"></i>
+
+
+                {% elif cat.slug == "wearables" %}
+
+                    <i class="fa-solid fa-clock"></i>
+
+
+                {% elif cat.slug == "smart-home" %}
+
+                    <i class="fa-solid fa-house"></i>
+
+
+                {% else %}
+
+                    <i class="fa-solid fa-tag"></i>
+
+                {% endif %}
+
+
+                {{ cat.name }}
+
+
+            </a>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <div class="result-count">
+
+            {{ products|length }}
+
+            product{{ products|length|pluralize }}
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         PRODUCTS
+    ================================================== -->
+
+    <div class="products">
+
+
+        {% for product in products %}
+
+
+        <article class="product-card">
+
+
+            <!-- WISHLIST -->
+
+            <form
+                method="post"
+                action="{% url 'add_wishlist' product.id %}"
+                class="wishlist-form"
+            >
+
+                {% csrf_token %}
+
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.get_full_path }}"
+                >
+
+
+                <button
+                    type="submit"
+                    class="wishlist-btn"
+                    aria-label="Add {{ product.name }} to wishlist"
+                >
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- PRODUCT IMAGE -->
+
+            <div class="product-image">
+
+
+                {% if product.image %}
+
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        loading="lazy"
+                    >
+
+
+                {% else %}
+
+
+                    <i
+                        class="fa-solid fa-image"
+                        style="
+                            font-size:45px;
+                            color:#cbd5e1;
+                        "
+                    ></i>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- PRODUCT BODY -->
+
+            <div class="product-body">
+
+
+                {% if product.category %}
+
+
+                <div class="product-category">
+
+                    {{ product.category.name }}
+
+                </div>
+
+
+                {% endif %}
+
+
+
+                <h3>
+
+                    {{ product.name }}
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    {{ product.description|truncatewords:14 }}
+
+                </p>
+
+
+
+                <!-- PRODUCT META -->
+
+                <div class="product-meta">
+
+
+                    {% if product.stock > 0 %}
+
+
+                        <span class="stock-pill available">
+
+                            <i
+                                class="fa-solid fa-circle"
+                                style="font-size:6px;"
+                            ></i>
+
+                            In stock
+
+                        </span>
+
+
+                    {% else %}
+
+
+                        <span class="stock-pill soldout">
+
+                            <i class="fa-solid fa-circle-xmark"></i>
+
+                            Out of stock
+
+                        </span>
+
+
+                    {% endif %}
+
+
+
+                    <span class="price">
+
+                        Rs. {{ product.price }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- PRODUCT ACTIONS -->
+
+                <div class="product-actions">
+
+
+                    <!-- ADD TO CART -->
+
+                    <form
+                        method="post"
+                        action="{% url 'add_to_cart' product.id %}"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <button
+                            type="submit"
+                            class="add-cart-btn"
+
+                            {% if product.stock <= 0 %}
+                                disabled
+                            {% endif %}
+                        >
+
+
+                            {% if product.stock > 0 %}
+
+
+                                <i class="fa-solid fa-cart-shopping"></i>
+
+                                Add to cart
+
+
+                            {% else %}
+
+
+                                <i class="fa-solid fa-ban"></i>
+
+                                Sold out
+
+
+                            {% endif %}
+
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- VIEW PRODUCT -->
+
+                    <a
+                        href="{% url 'product_detail' product.id %}"
+                        class="view-product-btn"
+                    >
+
+                        View product
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </article>
+
+
+        {% empty %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty">
+
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+
+            <h2>
+                No products found
+            </h2>
+
+
+            <p>
+                Try another category or search for something else.
+            </p>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+
+</div>
+
+{% endblock %}
